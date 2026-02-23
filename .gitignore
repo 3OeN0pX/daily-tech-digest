@@ -2,3 +2,4 @@ token.json
 daily-tech-digest-client.json
 .venv/
 __pycache__/
+videos.json

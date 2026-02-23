@@ -3,6 +3,7 @@
 전일 05:00 KST ~ 금일 05:00 KST 사이에 업로드된 영상을 출력한다.
 """
 
+import json
 import os
 from datetime import datetime, timedelta, timezone
 
@@ -116,6 +117,20 @@ def main():
         print(f"[{v['channel']}] {v['title']}")
         print(f"  https://www.youtube.com/watch?v={v['video_id']}")
         print()
+
+    # videos.json 저장
+    videos_json = [
+        {
+            "title": v["title"],
+            "url": f"https://www.youtube.com/watch?v={v['video_id']}",
+            "channel": v["channel"],
+        }
+        for v in all_videos
+    ]
+    output_path = os.path.join(BASE_DIR, "videos.json")
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(videos_json, f, ensure_ascii=False, indent=2)
+    print(f"videos.json 저장 완료 ({len(videos_json)}개 영상)")
 
 
 if __name__ == "__main__":
