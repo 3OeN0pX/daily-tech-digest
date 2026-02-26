@@ -37,7 +37,7 @@ def load_videos():
 
 
 def process_video(client, today, index, total, video):
-    """영상 1개에 대해 노트북 생성 → 소스 추가 → 리포트/슬라이드 생성."""
+    """영상 1개에 대해 노트북 생성 → 소스 추가 → 리포트 생성."""
     title = f"{today} - {video['title']}"
     prefix = f"  [{index}/{total}]"
 
@@ -61,13 +61,6 @@ def process_video(client, today, index, total, video):
         notebook_id=notebook_id,
         report_format="Create Your Own",
         custom_prompt=REPORT_PROMPT,
-        language="ko",
-    )
-
-    # 4. 슬라이드 생성
-    print(f"{prefix} 슬라이드 생성 요청...")
-    client.create_slide_deck(
-        notebook_id=notebook_id,
         language="ko",
     )
 
